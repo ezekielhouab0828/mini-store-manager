@@ -1,17 +1,18 @@
 {% extends "base.html" %}
-{% block content %}
 
+{% block content %}
 <h2 class="mb-4">🧾 Commandes</h2>
 
 <!-- Create order -->
 <div class="mb-3">
-    <a href="/orders/create" class="btn btn-success">➕ Créer une commande</a>
+    <a href="{{ url_for('orders.add_order_route') }}" class="btn btn-success">
+        ➕ Créer une commande
+    </a>
 </div>
 
 <!-- Orders table -->
 <div class="card shadow-sm">
     <div class="card-body">
-
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -23,7 +24,6 @@
                     <th></th>
                 </tr>
             </thead>
-
             <tbody>
                 {% for o in orders %}
                 <tr>
@@ -41,16 +41,15 @@
                     </td>
                     <td>{{ o.total }} €</td>
                     <td>
-                        <a href="/orders/{{ o.id }}" class="btn btn-sm btn-secondary">
+                        <a href="{{ url_for('orders.order_detail', order_id=o.id) }}"
+                           class="btn btn-sm btn-secondary">
                             Voir détails
                         </a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
-
         </table>
-
     </div>
 </div>
 

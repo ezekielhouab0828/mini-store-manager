@@ -1,26 +1,26 @@
 {% extends "base.html" %}
-{% block content %}
 
+{% block content %}
 <h2 class="mb-4">➕ Créer une commande</h2>
 
 <div class="card shadow-sm">
     <div class="card-body">
 
-        <form method="POST">
+        <form method="POST" action="{{ url_for('orders.add_order_route') }}">
 
             <!-- Choix du client -->
             <div class="mb-3">
                 <label class="form-label">Client</label>
                 <select name="customer_id" class="form-select" required>
                     {% for c in customers %}
-                        <option value="{{ c.id }}">{{ c.full_name }} — {{ c.email }}</option>
+                    <option value="{{ c.id }}">{{ c.full_name }} — {{ c.email }}</option>
                     {% endfor %}
                 </select>
             </div>
 
             <!-- Boutons -->
             <button class="btn btn-primary">Créer la commande</button>
-            <a href="/orders" class="btn btn-secondary">Annuler</a>
+            <a href="{{ url_for('orders.list_orders') }}" class="btn btn-secondary">Annuler</a>
 
         </form>
 
