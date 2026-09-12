@@ -1,0 +1,105 @@
+Page 1 — Introduction
+Mini Store Manager est une application web permettant à un petit commerce de gérer ses produits, clients, commandes et statistiques de vente.
+Le projet combine :
+
+conception d’une base SQLite,
+
+SQL avancé,
+
+développement Flask,
+
+interface HTML / Bootstrap,
+
+documentation technique.
+
+J’ai choisi Python + Flask pour sa simplicité et sa compatibilité avec SQLite.
+
+Page 2 — Conception de la base
+Tables principales
+Category(id, name, description)
+
+Product(id, name, description, price, stock, category_id)
+
+Customer(id, first_name, last_name, email, city, created_at)
+
+CustomerOrder(id, customer_id, order_date, status)
+
+OrderItem(id, order_id, product_id, quantity, unit_price)
+
+Contraintes
+PK / FK
+
+UNIQUE(email)
+
+CHECK(price >= 0, stock >= 0)
+
+relations cohérentes entre commandes et items
+
+Schéma relationnel (à insérer)
+Je te fournis le schéma juste après.
+
+Page 3 — Architecture de l’application
+Structure
+Flask Blueprint pour chaque module
+
+database.py pour les requêtes SQL
+
+templates/ pour les pages HTML
+
+transactions pour la création des commandes
+
+Fonctionnement
+chaque page appelle une fonction SQL
+
+les analytics utilisent des agrégats, CTE, LEFT JOIN, NOT EXISTS
+
+la création d’une commande est transactionnelle
+
+Page 4 — Pages de l’application
+Inclure les captures que tu m’as envoyées :
+
+Dashboard
+
+Produits
+
+Clients
+
+Commandes
+
+Catégories
+
+Analytics
+
+Avec une courte description pour chaque.
+
+Page 5 — SQL avancé
+Exemple 1 — Produits jamais commandés
+sql
+SELECT p.*
+FROM Product p
+LEFT JOIN OrderItem oi ON oi.product_id = p.id
+WHERE oi.product_id IS NULL;
+Exemple 2 — Commandes au-dessus de la moyenne
+sql
+WITH order_totals AS (
+    SELECT o.id, SUM(oi.quantity * oi.unit_price) AS total
+    FROM CustomerOrder o
+    LEFT JOIN OrderItem oi ON oi.order_id = o.id
+    GROUP BY o.id
+),
+avg_value AS (
+    SELECT AVG(total) AS avg FROM order_totals
+)
+SELECT ot.*
+FROM order_totals ot, avg_value av
+WHERE ot.total > av.avg;
+Page 6 — Conclusion
+Le projet m’a permis de combiner SQL avancé, conception de base, développement Flask et interface web.
+Les difficultés principales ont été la cohérence du seed et la gestion des transactions.
+Des améliorations possibles incluent :
+
+authentification,
+
+design plus avancé,
+
+graphiques pour les analytics.

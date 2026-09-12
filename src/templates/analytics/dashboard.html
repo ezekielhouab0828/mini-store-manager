@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="mb-4">📈 Analytics</h2>
+
+<!-- Average order value -->
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title">💶 Valeur moyenne des commandes</h5>
+        <p class="fs-4">{{ avg_order_value }} €</p>
+    </div>
+</div>
+
+<!-- High value orders -->
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title">🏆 Commandes à forte valeur</h5>
+
+        {% if high_value_orders %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Client</th>
+                    <th>Total</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for o in high_value_orders %}
+                <tr>
+                    <td>{{ o.id }}</td>
+                    <td>{{ o.customer_name }}</td>
+                    <td>{{ o.total }} €</td>
+                    <td>{{ o.order_date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p>Aucune commande à forte valeur.</p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Low stock products -->
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title">⚠️ Produits en stock faible</h5>
+
+        {% if low_stock_products %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in low_stock_products %}
+                <tr>
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.stock }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p>Aucun produit en stock faible.</p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Sales by month -->
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title">📅 Ventes par mois</h5>
+
+        {% if sales_by_month %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Mois</th>
+                    <th>Total des ventes (€)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in sales_by_month %}
+                <tr>
+                    <td>{{ row.month }}</td>
+                    <td>{{ row.total }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p>Aucune donnée disponible.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

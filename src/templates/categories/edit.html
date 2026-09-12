@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="mb-4">
+    {% if category %}
+        ✏️ Modifier une catégorie
+    {% else %}
+        ➕ Ajouter une catégorie
+    {% endif %}
+</h2>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <form method="POST">
+
+            <!-- Nom -->
+            <div class="mb-3">
+                <label class="form-label">Nom</label>
+                <input type="text" name="name" class="form-control"
+                       value="{{ category.name if category else '' }}" required>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea name="description" class="form-control" rows="3">{{ category.description if category else '' }}</textarea>
+            </div>
+
+            <!-- Boutons -->
+            <button class="btn btn-primary">
+                {% if category %}Mettre à jour{% else %}Ajouter{% endif %}
+            </button>
+
+            <a href="/categories" class="btn btn-secondary">Retour</a>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

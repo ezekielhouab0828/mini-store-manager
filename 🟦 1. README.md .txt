@@ -1,0 +1,159 @@
+🟦 1. README.md — Version parfaite, prête à coller
+Copie-colle tel quel dans ton README.md :
+
+Mini Store Manager
+Application de gestion de produits, clients, commandes et analytics — Master 1 Data Engineering & Cloud Computing
+
+🎯 Objectif du projet
+Mini Store Manager est une application web légère permettant à un petit commerce de gérer :
+
+ses produits,
+
+ses clients,
+
+ses commandes,
+
+son stock,
+
+ses statistiques de vente.
+
+Le projet combine :
+
+conception d’une base de données relationnelle,
+
+SQL avancé (agrégats, CTE, LEFT JOIN, transactions),
+
+développement backend (Flask),
+
+interface web simple (HTML / Bootstrap),
+
+gestion de projet (GitHub + documentation).
+
+🛠️ Technologies utilisées
+Python 3
+
+Flask
+
+SQLite
+
+HTML / CSS / Bootstrap
+
+Jinja2 Templates
+
+🗄️ Structure du dépôt
+Code
+mini-store-manager/
+│
+├── database/
+│   ├── schema.sql
+│   ├── seed.sql
+│   └── store.db
+│
+├── src/
+│   ├── app.py
+│   ├── database.py
+│   ├── init_db.py
+│   ├── products/
+│   ├── customers/
+│   ├── orders/
+│   ├── categories/
+│   ├── analytics/
+│   └── templates/
+│
+├── report/
+│   └── report.pdf
+│
+├── requirements.txt
+└── README.md
+🧩 Installation & exécution
+1. Cloner le dépôt
+Code
+git clone https://github.com/<ton_nom>/mini-store-manager.git
+cd mini-store-manager
+2. Créer l’environnement virtuel
+Code
+python -m venv venv
+source venv/bin/activate   # macOS / Linux
+venv\Scripts\activate      # Windows
+3. Installer les dépendances
+Code
+pip install -r requirements.txt
+4. Créer la base SQLite
+Code
+cd database
+sqlite3 store.db < schema.sql
+sqlite3 store.db < seed.sql
+5. Lancer l’application
+Code
+cd ../src
+python app.py
+L’application tourne sur :
+👉 http://127.0.0.1:5000
+
+📄 Pages de l’application
+🟦 Dashboard
+nombre de produits
+
+nombre de clients
+
+nombre de commandes
+
+revenu total
+
+5 dernières commandes
+
+produit le plus vendu
+
+🟦 Produits
+CRUD complet
+
+recherche
+
+filtre par catégorie
+
+tri
+
+stock faible (<5) visible
+
+🟦 Clients
+liste + recherche
+
+nombre de commandes
+
+total dépensé
+
+détails client + historique complet
+
+🟦 Commandes
+création d’une commande
+
+sélection client
+
+sélection produits
+
+quantité
+
+création order + order items
+
+mise à jour du stock
+
+refus si stock insuffisant
+
+détails commande
+
+🟦 Analytics
+revenu par catégorie
+
+top clients
+
+produits jamais commandés
+
+commandes > moyenne
+
+stock faible
+
+ventes par mois
+
+👤 Auteur
+Ezekiel Houab  
+Master 1 — Data Engineering & Cloud Computing

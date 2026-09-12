@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="mb-4">📊 Dashboard</h2>
+
+<div class="row mb-4">
+
+    <!-- Produits -->
+    <div class="col-md-3">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Produits</h5>
+                <p class="display-6">{{ products_count }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clients -->
+    <div class="col-md-3">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Clients</h5>
+                <p class="display-6">{{ customers_count }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Commandes -->
+    <div class="col-md-3">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Commandes</h5>
+                <p class="display-6">{{ orders_count }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Revenue -->
+    <div class="col-md-3">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Revenu total</h5>
+                <p class="display-6">{{ total_revenue }} €</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Best-selling product -->
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title">🏆 Produit le plus vendu</h5>
+        {% if best_product %}
+            <p class="fs-5">{{ best_product.name }} — {{ best_product.total_quantity }} unités vendues</p>
+        {% else %}
+            <p>Aucune vente enregistrée.</p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Recent orders -->
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title mb-3">🧾 5 dernières commandes</h5>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Client</th>
+                    <th>Date</th>
+                    <th>Statut</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in recent_orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.customer_name }}</td>
+                    <td>{{ order.order_date }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>{{ order.total }} €</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="mb-4">🧾 Commandes</h2>
+
+<!-- Create order -->
+<div class="mb-3">
+    <a href="/orders/create" class="btn btn-success">➕ Créer une commande</a>
+</div>
+
+<!-- Orders table -->
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Client</th>
+                    <th>Date</th>
+                    <th>Statut</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for o in orders %}
+                <tr>
+                    <td>{{ o.id }}</td>
+                    <td>{{ o.customer_name }}</td>
+                    <td>{{ o.order_date }}</td>
+                    <td>
+                        {% if o.status == "completed" %}
+                            <span class="badge bg-success">Terminée</span>
+                        {% elif o.status == "pending" %}
+                            <span class="badge bg-warning text-dark">En attente</span>
+                        {% else %}
+                            <span class="badge bg-secondary">{{ o.status }}</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ o.total }} €</td>
+                    <td>
+                        <a href="/orders/{{ o.id }}" class="btn btn-sm btn-secondary">
+                            Voir détails
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}

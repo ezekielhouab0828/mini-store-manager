@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="mb-4">
+    {% if product %}
+        ✏️ Modifier un produit
+    {% else %}
+        ➕ Ajouter un produit
+    {% endif %}
+</h2>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <form method="POST">
+
+            <!-- Nom -->
+            <div class="mb-3">
+                <label class="form-label">Nom</label>
+                <input type="text" name="name" class="form-control"
+                       value="{{ product.name if product else '' }}" required>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea name="description" class="form-control" rows="3">{{ product.description if product else '' }}</textarea>
+            </div>
+
+            <!-- Prix -->
+            <div class="mb-3">
+                <label class="form-label">Prix (€)</label>
+                <input type="number" step="0.01" name="price" class="form-control"
+                       value="{{ product.price if product else '' }}" required>
+            </div>
+
+            <!-- Stock -->
+            <div class="mb-3">
+                <label class="form-label">Stock</label>
+                <input type="number" name="stock" class="form-control"
+                       value="{{ product.stock if product else '' }}" required>
+            </div>
+
+            <!-- Catégorie -->
+            <div class="mb-3">
+                <label class="form-label">Catégorie</label>
+                <select name="category_id" class="form-select" required>
+                    {% for cat in categories %}
+                        <option value="{{ cat.id }}"
+                            {% if product and product.category_id == cat.id %}selected{% endif %}>
+                            {{ cat.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Boutons -->
+            <button class="btn btn-primary">
+                {% if product %}Mettre à jour{% else %}Ajouter{% endif %}
+            </button>
+
+            <a href="/products" class="btn btn-secondary">Retour</a>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
